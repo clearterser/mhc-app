@@ -1,0 +1,38 @@
+// Хандивын бүртгэлийн өгөгдлийн сан.
+// Клиентийг lib/generated/prisma руу үүсгэнэ: npx prisma generate
+// Хүснэгтийг шинэчлэх: npx prisma db push
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+// Холболтын URL нь prisma.config.ts дотор (Prisma 7-д schema-д url бичихгүй).
+datasource db {
+  provider = "sqlite"
+}
+
+model Donation {
+  id            String   @id @default(cuid())
+  // money | goods | service
+  type          String
+  name          String
+  email         String?
+  phone         String?
+  // money: хандивын дүн; goods/service: тооцоолсон үнэлгээ (USD)
+  amount        Float?
+  // мөнгөн хандивын төлбөрийн арга (Zeffy, Stripe, Zelle, Чек г.м)
+  method        String?
+  // эд зүйлс / үйл ажиллагааны тодорхойлолт
+  description   String?
+  // хандив өгсөн огноо (YYYY-MM-DD)
+  donatedAt     String?
+  note          String?
+  publicListing Boolean  @default(true)
+  // pending | approved | rejected
+  status        String   @default("pending")
+  // form (вэбийн маягтаас) | admin (админ гараар нэмсэн)
+  source        String   @default("form")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
