@@ -23,7 +23,7 @@ const TYPES = [
   { key: "service", label: "Үйл ажиллагаа", icon: HandHelping },
 ];
 
-const METHODS = ["Zeffy", "Stripe", "PayPal", "Zelle", "Чек", "Бэлэн мөнгө", "Бусад"];
+const METHODS = ["Zeffy", "PayPal", "Zelle", "Чек", "Бэлэн мөнгө", "Бусад"];
 
 export function DonationAddForm() {
   const [type, setType] = useState("money");

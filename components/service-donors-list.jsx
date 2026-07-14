@@ -4,19 +4,11 @@ import { useMemo, useState } from "react";
 import { HandHelping } from "lucide-react";
 
 import { DonorSearch, matchesQuery } from "@/components/donor-search";
+import { formatDonorDate } from "@/lib/utils";
 
 export function ServiceDonorsList({ donors, lang, labels }) {
   const [query, setQuery] = useState("");
 
-  const dateFmt = useMemo(
-    () =>
-      new Intl.DateTimeFormat(lang === "mn" ? "mn-MN" : "en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      }),
-    [lang]
-  );
   // Always format USD with en-US: Node.js ICU adds a space between the "$" and
   // the number for mn-MN ("$ 12,200") while the browser ICU does not ("$12,200"),
   // causing a hydration mismatch. USD formatting doesn't need localization.
@@ -52,13 +44,13 @@ export function ServiceDonorsList({ donors, lang, labels }) {
       {filtered.length > 0 ? (
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((d, i) => {
-            const dateLabel = d.date ? dateFmt.format(new Date(d.date)) : null;
+            const dateLabel = formatDonorDate(d.date, lang);
             const valueLabel =
               d.value != null ? amountFmt.format(d.value) : null;
             return (
               <li
                 key={`${d.name}-${i}`}
-                className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-5 ring-1 ring-foreground/10"
+                className="animated-border [--mhc-accent:var(--color-sky-500)] flex flex-col gap-2 rounded-2xl border border-border bg-muted/40 p-5 ring-1 ring-foreground/10 transition-colors duration-300 hover:bg-card"
               >
                 <div className="flex items-start gap-3">
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-blue-500 text-white shadow-sm">

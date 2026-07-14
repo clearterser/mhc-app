@@ -14,6 +14,7 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { TierBenefitsDrawer } from "@/components/tier-benefits-drawer";
 import { DonorSearch, matchesQuery } from "@/components/donor-search";
+import { formatDonorDate } from "@/lib/utils";
 
 const TIER_META = {
   ochir: {
@@ -124,15 +125,6 @@ export function MoneyDonorsList({
       }),
     []
   );
-  const dateFmt = useMemo(
-    () =>
-      new Intl.DateTimeFormat(lang === "mn" ? "mn-MN" : "en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      }),
-    [lang]
-  );
 
   const filteredByTier = useMemo(() => {
     const out = {};
@@ -208,7 +200,7 @@ export function MoneyDonorsList({
                     {list.map((donor) => (
                       <li
                         key={donor.name}
-                        className={`flex flex-col gap-1 rounded-xl border px-3.5 py-2.5 ${meta.chip}`}
+                        className={`animated-border [--mhc-accent:currentColor] flex flex-col gap-1 rounded-xl border px-3.5 py-2.5 transition-colors duration-300 hover:bg-card ${meta.chip}`}
                       >
                         <span className="text-sm font-semibold leading-tight">
                           {donor.name}
@@ -224,7 +216,7 @@ export function MoneyDonorsList({
                               dateTime={donor.date}
                               className="tabular-nums"
                             >
-                              {dateFmt.format(new Date(donor.date))}
+                              {formatDonorDate(donor.date, lang)}
                             </time>
                           ) : null}
                         </span>

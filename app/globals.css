@@ -128,3 +128,62 @@
     @apply font-sans;
   }
 }
+
+/* Донор картын хүрээг hover үед эргэлддэг градиент туяагаар тодруулна.
+   conic-gradient-ийг mask-аар зөвхөн хүрээ (padding ring) хэсэгт харуулж,
+   --mhc-border-angle-ийг 0→360° эргүүлж хөдөлгөөнт болгоно.
+   Өнгийг --mhc-accent-аар (карт бүр өөрийн аялгуугаар) тохируулна. */
+@property --mhc-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes mhc-border-rotate {
+  to {
+    --mhc-border-angle: 360deg;
+  }
+}
+
+.animated-border {
+  position: relative;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--mhc-border-angle),
+    transparent 0deg,
+    var(--mhc-accent, var(--primary)) 90deg,
+    transparent 180deg,
+    var(--mhc-accent, var(--primary)) 270deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.animated-border:hover::before {
+  opacity: 1;
+  animation: mhc-border-rotate 2.5s linear infinite;
+}
+
+/* Хөдөлгөөн багасгах тохиргоотой хэрэглэгчид зөвхөн статик тодрол. */
+@media (prefers-reduced-motion: reduce) {
+  .animated-border:hover::before {
+    animation: none;
+  }
+}

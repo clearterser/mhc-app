@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { SignOutButton } from "@clerk/nextjs";
 import {
   Heart,
   Gift,
@@ -24,7 +25,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { prisma } from "@/lib/db";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { isAdminAuthenticated, clerkEnabled } from "@/lib/admin-auth";
 import {
   adminLogout,
   adminSetDonationStatus,
@@ -118,12 +119,21 @@ export default async function AdminDonationsPage() {
             Монгол Өв Соёлын Төв — админ хэсэг
           </p>
         </div>
-        <form action={adminLogout}>
-          <Button variant="outline" className="h-10 rounded-xl px-4">
-            <LogOut className="size-4" />
-            Гарах
-          </Button>
-        </form>
+        {clerkEnabled() ? (
+          <SignOutButton redirectUrl="/admin/login">
+            <Button variant="outline" className="h-10 rounded-xl px-4">
+              <LogOut className="size-4" />
+              Гарах
+            </Button>
+          </SignOutButton>
+        ) : (
+          <form action={adminLogout}>
+            <Button variant="outline" className="h-10 rounded-xl px-4">
+              <LogOut className="size-4" />
+              Гарах
+            </Button>
+          </form>
+        )}
       </div>
 
       {/* Stats */}

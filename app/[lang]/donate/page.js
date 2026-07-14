@@ -5,15 +5,10 @@ import {
   GraduationCap,
   CalendarDays,
   Building2,
-  CreditCard,
-  Sparkles,
   Mail,
   HeartHandshake,
   ShieldCheck,
   ArrowRight,
-  ExternalLink,
-  Clock,
-  Landmark,
   ClipboardList,
 } from "lucide-react";
 
@@ -25,7 +20,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { CopyValueButton } from "@/components/copy-value-button";
+import { DonateOptions } from "@/components/donate-options";
 import { localizedPath } from "@/lib/i18n";
 import { getDonationProviders } from "@/lib/donate-providers";
 import { getDictionary, hasLocale } from "../dictionaries";
@@ -35,49 +30,6 @@ const IMPACT_META = [
   { icon: CalendarDays, gradient: "from-rose-500 to-pink-500" },
   { icon: Building2, gradient: "from-sky-500 to-cyan-500" },
 ];
-
-const PROVIDER_META = {
-  zeffy: {
-    icon: Sparkles,
-    accent: "from-emerald-500 to-teal-500",
-    border:
-      "border-emerald-300/60 dark:border-emerald-900/60",
-    tagClass:
-      "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300",
-    btnClass:
-      "bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500",
-    recommended: true,
-  },
-  stripe: {
-    icon: CreditCard,
-    accent: "from-violet-500 to-indigo-500",
-    border: "border-border",
-    tagClass:
-      "bg-violet-100 text-violet-700 dark:bg-violet-950/60 dark:text-violet-300",
-    btnClass:
-      "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-500 hover:to-indigo-500",
-  },
-  paypal: {
-    icon: HeartHandshake,
-    accent: "from-sky-500 to-blue-500",
-    border: "border-border",
-    tagClass:
-      "bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300",
-    btnClass:
-      "bg-gradient-to-r from-sky-600 to-blue-600 text-white hover:from-sky-500 hover:to-blue-500",
-  },
-  zelle: {
-    icon: Landmark,
-    accent: "from-fuchsia-500 to-purple-600",
-    border: "border-border",
-    tagClass:
-      "bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-950/60 dark:text-fuchsia-300",
-    btnClass:
-      "bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white hover:from-fuchsia-500 hover:to-purple-500",
-  },
-};
-
-const PROVIDER_ORDER = ["zeffy", "stripe", "paypal", "zelle"];
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -135,190 +87,50 @@ export default async function DonatePage({ params }) {
         </div>
       </section>
 
-      {/* Impact */}
-      <section className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            {t.impactTitle}
-          </h2>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {t.impactItems.map((item, i) => {
-            const meta = IMPACT_META[i];
-            const Icon = meta.icon;
-            return (
-              <Card key={item.title} className="p-2">
-                <CardHeader>
-                  <span
-                    className={`flex size-12 items-center justify-center rounded-xl bg-gradient-to-br ${meta.gradient} text-white shadow-md`}
-                  >
-                    <Icon className="size-6" />
-                  </span>
-                  <CardTitle className="mt-4 text-lg">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="leading-relaxed">
-                    {item.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Suggested amounts */}
-      <section className="border-y border-border/60 bg-muted/30">
+      {/* 2 багана: зүүн талд нөлөө/итгэл, баруун талд хандив өгөх интерактив хэсэг */}
+      <section
+        id="give"
+        className="scroll-mt-20 border-y border-border/60 bg-muted/30"
+      >
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {t.amountsTitle}
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              {t.amountsLead}
-            </p>
-          </div>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+            {/* Зүүн: яагаад хандивлах вэ */}
+            <div className="lg:sticky lg:top-24">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                {t.impactTitle}
+              </h2>
 
-          <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
-            {t.amounts.map((amount) => (
-              <div
-                key={amount.label}
-                className="rounded-2xl border border-border bg-card px-5 py-6 text-center ring-1 ring-foreground/10"
-              >
-                <div className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-3xl font-bold text-transparent">
-                  {amount.value}
-                </div>
-                <div className="mt-1.5 text-xs font-medium text-muted-foreground">
-                  {amount.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Provider selection */}
-      <section id="providers" className="mx-auto w-full max-w-6xl scroll-mt-20 px-5 py-16 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            {t.providersTitle}
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            {t.providersLead}
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {PROVIDER_ORDER.map((key) => {
-            const meta = PROVIDER_META[key];
-            const tProv = t.providers[key];
-            const cfg = providers[key];
-            const Icon = meta.icon;
-            const isReady = cfg.configured;
-            const isZelle = key === "zelle";
-
-            return (
-              <Card
-                key={key}
-                className={`p-2 ${meta.border} ${
-                  meta.recommended
-                    ? "ring-2 ring-emerald-400/40 dark:ring-emerald-700/40"
-                    : ""
-                }`}
-              >
-                <CardHeader>
-                  <div className="flex items-start justify-between gap-3">
-                    <span
-                      className={`flex size-12 items-center justify-center rounded-xl bg-gradient-to-br ${meta.accent} text-white shadow-md`}
-                    >
-                      <Icon className="size-6" />
-                    </span>
-                    <span
-                      className={`inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold ${meta.tagClass}`}
-                    >
-                      {tProv.tag}
-                    </span>
-                  </div>
-                  <CardTitle className="mt-4 text-xl">{tProv.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-1 flex-col">
-                  <CardDescription className="flex-1 leading-relaxed">
-                    {tProv.description}
-                  </CardDescription>
-
-                  {isZelle ? (
-                    isReady ? (
-                      <div className="mt-6 space-y-2">
-                        <div className="text-xs font-medium text-muted-foreground">
-                          {tProv.recipientLabel}
-                        </div>
-                        {cfg.email ? (
-                          <div className="flex flex-col gap-2">
-                            <code className="block rounded-lg border border-border bg-muted/40 px-3 py-2 text-xs break-all">
-                              {cfg.email}
-                            </code>
-                            <CopyValueButton
-                              value={cfg.email}
-                              label={tProv.copyEmailCta}
-                              copiedLabel={tProv.copiedLabel}
-                              className={`h-10 w-full rounded-xl ${meta.btnClass}`}
-                            />
-                          </div>
-                        ) : null}
-                        {cfg.phone ? (
-                          <div className="flex flex-col gap-2 pt-1">
-                            <code className="block rounded-lg border border-border bg-muted/40 px-3 py-2 text-xs">
-                              {cfg.phone}
-                            </code>
-                            <CopyValueButton
-                              value={cfg.phone}
-                              label={tProv.copyPhoneCta}
-                              copiedLabel={tProv.copiedLabel}
-                              className={`h-10 w-full rounded-xl ${meta.btnClass}`}
-                            />
-                          </div>
-                        ) : null}
+              <div className="mt-8 space-y-5">
+                {t.impactItems.map((item, i) => {
+                  const meta = IMPACT_META[i];
+                  const Icon = meta.icon;
+                  return (
+                    <div key={item.title} className="flex gap-4">
+                      <span
+                        className={`flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${meta.gradient} text-white shadow-md`}
+                      >
+                        <Icon className="size-5" />
+                      </span>
+                      <div>
+                        <h3 className="font-semibold">{item.title}</h3>
+                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                          {item.description}
+                        </p>
                       </div>
-                    ) : (
-                      <Button
-                        disabled
-                        className="mt-6 h-11 w-full rounded-xl"
-                        variant="outline"
-                      >
-                        <Clock className="size-4" />
-                        {t.comingSoon}
-                      </Button>
-                    )
-                  ) : isReady ? (
-                    <Button
-                      asChild
-                      className={`mt-6 h-11 w-full rounded-xl ${meta.btnClass}`}
-                    >
-                      <a
-                        href={cfg.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Heart className="size-4" />
-                        {tProv.cta}
-                        <ExternalLink className="ml-auto size-3.5 opacity-70" />
-                      </a>
-                    </Button>
-                  ) : (
-                    <Button
-                      disabled
-                      className="mt-6 h-11 w-full rounded-xl"
-                      variant="outline"
-                    >
-                      <Clock className="size-4" />
-                      {t.comingSoon}
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-            );
-          })}
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1.5 text-xs font-semibold text-amber-700 dark:border-amber-900 dark:bg-amber-950/50 dark:text-amber-300">
+                <ShieldCheck className="size-3.5" />
+                {t.badge}
+              </div>
+            </div>
+
+            {/* Баруун: Хандиваа өгөх (интерактив) */}
+            <DonateOptions labels={t} providers={providers} />
+          </div>
         </div>
       </section>
 

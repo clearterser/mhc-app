@@ -333,7 +333,7 @@
         "items": [
           {
             "q": "How can I donate?",
-            "a": "Visit the Donate page and choose Zeffy, Stripe, or PayPal. You can also donate by bank transfer or check — contact info@mongolianheritagecenter.org for instructions."
+            "a": "Visit the Donate page and choose Zeffy or PayPal. You can also donate by bank transfer or check — contact info@mongolianheritagecenter.org for instructions."
           },
           {
             "q": "Are donations tax-deductible?",
@@ -563,7 +563,7 @@
         "sections": [
           { "ref": "1.1", "heading": "Information you provide directly:" },
           { "ref": "1.1.1", "text": "Name, email, phone, and mailing address — collected during donations, membership signup, or event registration." },
-          { "ref": "1.1.2", "text": "Payment information — processed through third-party providers such as Zeffy, Stripe, and PayPal. We do not store credit card numbers." },
+          { "ref": "1.1.2", "text": "Payment information — processed through third-party providers such as Zeffy and PayPal. We do not store credit card numbers." },
           { "ref": "1.1.3", "text": "Feedback and messages — text submitted through our “Contact” form." },
           { "ref": "1.2", "heading": "Information collected automatically:" },
           { "ref": "1.2.1", "text": "IP address, browser type, pages visited, and visit timestamps — through standard server logs." },
@@ -598,7 +598,7 @@
         "sections": [
           { "ref": "4.1", "text": "We share your information only with Center staff and authorized volunteers who need it to serve you." },
           { "ref": "4.2", "text": "We share information with third-party service providers only as needed to operate our services. These include:" },
-          { "ref": "4.2.1", "text": "Payment processors (Zeffy, Stripe, PayPal) — each has its own privacy policy." },
+          { "ref": "4.2.1", "text": "Payment processors (Zeffy, PayPal) — each has its own privacy policy." },
           { "ref": "4.2.2", "text": "Email delivery services (e.g., mailing list providers)." },
           { "ref": "4.3", "text": "We do not sell or rent your information to third parties for commercial purposes." },
           { "ref": "4.4", "text": "We may disclose information in response to lawful legal requests." }
@@ -1248,7 +1248,7 @@
   },
   "donate": {
     "metaTitle": "Donate — Mongolian Heritage Center",
-    "metaDescription": "Make a tax-deductible donation to the Mongolian Heritage Center. Give securely via Stripe, PayPal, or Zeffy. IRS EIN: 93-3162554.",
+    "metaDescription": "Make a tax-deductible donation to the Mongolian Heritage Center. Give securely via PayPal or Zeffy. IRS EIN: 93-3162554.",
     "breadcrumb": "Donate",
     "h1Pre": "Your donation",
     "h1Highlight": "preserves our heritage",
@@ -1270,28 +1270,32 @@
         "description": "Rent, build-out, and operations for a permanent community center."
       }
     ],
-    "amountsTitle": "Suggested amounts",
-    "amountsLead": "Every gift makes a difference. These are just suggestions — give what feels right.",
+    "giveTitle": "Make your donation",
+    "giveLead": "First choose an amount, then pick whichever payment method works best for you below.",
+    "stepper": ["Choose amount", "Payment method", "Complete"],
+    "amountsTitle": "Choose an amount",
+    "amountsLead": "Every gift makes a difference. Pick a suggested amount or enter your own.",
     "amounts": [
-      { "value": "$100", "label": "Donor" },
-      { "value": "$250", "label": "Honored Donor" },
-      { "value": "$500", "label": "Distinguished Donor" },
-      { "value": "$2,000", "label": "Bronze Donor" }
+      { "value": "$25" },
+      { "value": "$50" },
+      { "value": "$100" },
+      { "value": "$250" }
     ],
-    "providersTitle": "Choose how you'd like to give",
+    "amountCustomLabel": "Custom amount",
+    "amountCustomPlaceholder": "Amount",
+    "amountSelectedTemplate": "Selected amount: {amount}",
+    "giveAmountTemplate": "Give {amount} via {provider}",
+    "providersTitle": "Choose a payment method",
     "providersLead": "Give securely online through any of the trusted services below.",
+    "methodLockedHint": "Payment methods will appear here once you choose an amount.",
+    "continueCta": "Continue",
+    "backCta": "Back",
     "providers": {
       "zeffy": {
         "title": "Zeffy",
         "tag": "Free for nonprofits",
         "description": "Zero processing fees, so 100% of your gift goes to the Center. Built specifically for 501(c)(3) organizations.",
         "cta": "Give via Zeffy"
-      },
-      "stripe": {
-        "title": "Stripe",
-        "tag": "Card · Apple Pay · Google Pay",
-        "description": "Industry-leading secure payments. Accepts all major credit and debit cards.",
-        "cta": "Give by card"
       },
       "paypal": {
         "title": "PayPal",
@@ -1592,7 +1596,7 @@
     "steps": [
       {
         "title": "Make your donation",
-        "description": "Give through Zeffy, Stripe, PayPal, Zelle, or by check — in-kind and service donations count too."
+        "description": "Give through Zeffy, PayPal, Zelle, or by check — in-kind and service donations count too."
       },
       {
         "title": "Fill out the form",
@@ -1619,7 +1623,7 @@
       "amountLabel": "Donation amount (USD)",
       "amountPlaceholder": "100",
       "methodLabel": "Payment method",
-      "methodOptions": ["Zeffy", "Stripe", "PayPal", "Zelle", "Check", "Cash", "Other"],
+      "methodOptions": ["Zeffy", "PayPal", "Zelle", "Check", "Cash", "Other"],
       "itemLabel": "Description of goods",
       "itemPlaceholder": "e.g. 20 Mongolian books",
       "activityLabel": "Description of service",
