@@ -3,7 +3,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowRight,
-  Sparkles,
   Heart,
   Users,
   GraduationCap,
@@ -82,37 +81,26 @@ export default async function Home({ params }) {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        {/* Background photo */}
+      {/* Hero — cinematic бүтэн дэлгэцийн зураг + шилэн панель */}
+      <section className="relative isolate overflow-hidden">
+        {/* Дэлгэц дүүрэн зураг */}
         <Image
           src="/hero-chicago.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="-z-30 object-cover object-center opacity-45 dark:opacity-30"
+          className="-z-20 object-cover object-center"
         />
-        {/* Soft top-to-bottom overlay so text stays readable on the image */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-background/30 via-background/75 to-background"
-        />
-        {/* Decorative blobs (existing) */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -top-32 -left-24 size-96 rounded-full bg-amber-400/30 blur-3xl dark:bg-amber-600/20" />
-          <div className="absolute -top-16 right-0 size-96 rounded-full bg-rose-400/30 blur-3xl dark:bg-rose-600/20" />
-          <div className="absolute top-40 left-1/3 size-80 rounded-full bg-violet-400/20 blur-3xl dark:bg-violet-600/10" />
+        {/* Уншигдац сайжруулах давхарга — панель тал ба доод захыг дэвсгэр рүү уусгана */}
+        <div aria-hidden className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/45 to-background/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-background/5" />
         </div>
 
-        <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28 lg:py-32">
-          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-1.5 text-sm font-medium text-amber-700 dark:border-amber-900 dark:bg-amber-950/50 dark:text-amber-300">
-              <Sparkles className="size-4" />
-              {t.badge}
-            </span>
-
-            <h1 className="mt-6 text-4xl font-bold tracking-tight text-balance sm:text-6xl">
+        <div className="mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-6xl items-center px-5 py-24 sm:px-8">
+          <div className="max-w-2xl rounded-3xl border border-white/30 bg-card/65 p-8 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl sm:p-10 dark:border-white/10 dark:bg-card/55">
+            <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
               {t.h1Pre}{" "}
               <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 bg-clip-text text-transparent">
                 {t.h1Highlight}
@@ -120,7 +108,7 @@ export default async function Home({ params }) {
               {t.h1Post}
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
               {t.lead}
             </p>
 
@@ -137,7 +125,7 @@ export default async function Home({ params }) {
               <Button
                 asChild
                 variant="outline"
-                className="h-12 rounded-xl px-7 text-base"
+                className="h-12 rounded-xl border-foreground/20 bg-background/40 px-7 text-base backdrop-blur hover:bg-background/70"
               >
                 <Link href={lp("/about")}>
                   {t.ctaAbout}

@@ -121,11 +121,45 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+  /* Суурь өнгийг html-д (canvas) байрлуулж, body-г тунгалаг үлдээснээр
+     доорх maze pattern давхарга харагдах боломжтой болно. */
   html {
-    @apply font-sans;
+    @apply bg-background font-sans;
+  }
+  body {
+    @apply text-foreground;
+  }
+}
+
+/* Изометр maze хээ — вебийн бүх хуудасны нам гүм дэвсгэр.
+   position: fixed давхарга (background-attachment биш) тул mobile дээр
+   repaint jank үүсгэхгүй, гүйлгэхэд хөдлөхгүй. image-set нь хамгийн жижиг
+   форматыг (AVIF → WebP) хөтөчид сонгуулна. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: image-set(
+    url("/maze-bg.avif") type("image/avif"),
+    url("/maze-bg.webp") type("image/webp")
+  );
+  background-size: 320px auto;
+  background-position: center;
+  background-repeat: repeat;
+  opacity: 0.06;
+}
+
+/* Бараан горимд шугамыг цайруулж (invert), бага зэрэг тодруулна. */
+.dark body::before {
+  opacity: 0.1;
+  filter: invert(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body::before {
+    transition: opacity 0.4s ease;
   }
 }
 
