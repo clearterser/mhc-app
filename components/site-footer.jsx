@@ -15,6 +15,7 @@ export function SiteFooter({ lang, dict }) {
       links: [
         { href: lp("/"), label: t.linkHome },
         { href: lp("/about"), label: t.linkAbout },
+        { href: lp("/chairman"), label: t.linkChairman },
         { href: lp("/governance"), label: t.linkStructure },
         { href: lp("/team"), label: t.linkTeam },
         { href: lp("/events"), label: t.linkEvents },
@@ -27,10 +28,12 @@ export function SiteFooter({ lang, dict }) {
       title: t.supportTitle,
       links: [
         { href: lp("/donate"), label: t.linkDonate },
+        { href: lp("/membership"), label: t.linkMembership },
         { href: lp("/donors"), label: t.linkDonors },
         { href: lp("/rooms"), label: t.linkRooms },
+        { href: lp("/volunteer"), label: t.linkVolunteer },
+        { href: lp("/reports"), label: t.linkReports },
         { href: lp("/faq"), label: t.linkFaq },
-        { href: lp("/contact"), label: t.linkVolunteer },
         { href: lp("/contact"), label: t.linkPartner },
       ],
     },

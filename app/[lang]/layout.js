@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Nunito, Geist_Mono } from "next/font/google";
 
 import "../globals.css";
-import { SiteHeader } from "@/components/site-header";
+import Navbar from "@/components/Navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { locales } from "@/lib/i18n";
 import { getDictionary, hasLocale } from "./dictionaries";
@@ -38,7 +38,7 @@ export default async function RootLayout({ children, params }) {
       className={`${nunito.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <SiteHeader lang={lang} dict={dict} />
+        <Navbar lang={lang} />
         <main className="flex-1">{children}</main>
         <SiteFooter lang={lang} dict={dict} />
       </body>

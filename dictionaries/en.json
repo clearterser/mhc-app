@@ -257,6 +257,9 @@
     "linkVolunteer": "Volunteer",
     "linkPartner": "Partnerships",
     "linkFaq": "FAQs",
+    "linkChairman": "Chair's Message",
+    "linkMembership": "Membership",
+    "linkReports": "Financial & Activity Reports",
     "copyright": "© {year} Mongolian Heritage Center. All rights reserved.",
     "terms": "Terms of Service",
     "privacy": "Privacy"
@@ -1816,5 +1819,45 @@
       "Manage programs and projects",
       "Enforce internal rules and safety procedures"
     ]
+  },
+  "membership": {
+    "metaTitle": "Membership | Mongolian Heritage Center",
+    "metaDescription": "Information about membership at the Mongolian Heritage Center.",
+    "breadcrumb": "Membership",
+    "h1": "Membership",
+    "lead": "Become a member of the Mongolian Heritage Center and help pass the Mongolian language and heritage on to the next generation.",
+    "pendingTitle": "Content coming soon",
+    "pendingText": "Details on membership terms, benefits, and dues will be published here soon. If you are interested in the meantime, please get in touch with us directly.",
+    "ctaContact": "Contact us"
+  },
+  "volunteer": {
+    "metaTitle": "Volunteer | Mongolian Heritage Center",
+    "metaDescription": "Volunteer opportunities at the Mongolian Heritage Center.",
+    "breadcrumb": "Volunteer",
+    "h1": "Volunteer",
+    "lead": "Give your time and skills as a volunteer and take part in the Center's work.",
+    "pendingTitle": "Content coming soon",
+    "pendingText": "Details on volunteer roles and how to sign up will be published here soon. If you would like to help in the meantime, please get in touch.",
+    "ctaContact": "Contact us"
+  },
+  "reports": {
+    "metaTitle": "Financial and Activity Reports | Mongolian Heritage Center",
+    "metaDescription": "Financial and activity reports of the Mongolian Heritage Center.",
+    "breadcrumb": "Reports",
+    "h1": "Financial and Activity Reports",
+    "lead": "The Mongolian Heritage Center is committed to transparency in its operations and finances.",
+    "pendingTitle": "Reports coming soon",
+    "pendingText": "Annual financial and activity reports will be published here soon. If you need any clarification in the meantime, please get in touch.",
+    "ctaContact": "Contact us"
+  },
+  "chairman": {
+    "metaTitle": "Message from the Chair of the Board | Mongolian Heritage Center",
+    "metaDescription": "A message from the Chair of the Board of the Mongolian Heritage Center.",
+    "breadcrumb": "Chair's Message",
+    "h1": "Message from the Chair of the Board",
+    "lead": "A message from the Chair of the Board of the Mongolian Heritage Center.",
+    "pendingTitle": "Message coming soon",
+    "pendingText": "The full message from the Chair of the Board will be published here soon.",
+    "ctaContact": "Contact us"
   }
 }
